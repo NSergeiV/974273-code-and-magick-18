@@ -4,7 +4,6 @@
 // Файл dialog.js
 (function () {
   var userDialog = document.querySelector('.setup');
-  window.userDialog = userDialog;
   var iconAvatar = document.querySelector('.setup-open');
   var iconCloseUserDialog = userDialog.querySelector('.setup-close');
   var iconAvatarFocus = iconAvatar.querySelector('.setup-open-icon');
@@ -57,8 +56,8 @@
   var closePopap = function () {
     if (inputName !== document.activeElement) {
       userDialog.classList.add('hidden');
-      window.userDialog.style.top = null;
-      window.userDialog.style.left = null;
+      userDialog.style.top = null;
+      userDialog.style.left = null;
       document.removeEventListener('keydown', onUserDialogClose);
       document.removeEventListener('keydown', onUserDialogFocusClose);
       document.removeEventListener('keydown', onFormCancelSubmit, false);
@@ -76,7 +75,8 @@
 // ----------- Перетаскивание попап
 
 (function () {
-  var avatarPopap = document.querySelector('.upload');
+  var userDialog = document.querySelector('.setup');
+  var avatarPopap = userDialog.querySelector('.upload');
 
   avatarPopap.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -99,15 +99,15 @@
       startCoord.x = movEvt.clientX;
       startCoord.y = movEvt.clientY;
 
-      window.userDialog.style.top = (window.userDialog.offsetTop - shift.y) + 'px';
-      window.userDialog.style.left = (window.userDialog.offsetLeft - shift.x) + 'px';
+      userDialog.style.top = (userDialog.offsetTop - shift.y) + 'px';
+      userDialog.style.left = (userDialog.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      avatarPopap.removeEventListener('mousemove', onMouseMove);
-      avatarPopap.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
         var onClickPreventDefault = function (clEvt) {
@@ -118,7 +118,7 @@
       }
     };
 
-    avatarPopap.addEventListener('mousemove', onMouseMove);
-    avatarPopap.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 })();
