@@ -106,8 +106,8 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      avatarPopap.removeEventListener('mousemove', onMouseMove);
-      avatarPopap.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
         var onClickPreventDefault = function (clEvt) {
@@ -118,7 +118,7 @@
       }
     };
 
-    avatarPopap.addEventListener('mousemove', onMouseMove);
-    avatarPopap.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 })();
